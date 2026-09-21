@@ -11,14 +11,14 @@
   background-repeat: no-repeat;
   position: relative;
   padding: 70px 20px 60px;
-  background-color: #0a3d91;
+  background: linear-gradient(135deg, #0d3b2a 0%, #0f8f61 42%, #0f172a 100%);
 }
 
 .flight-hero::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10, 61, 145, 0.5), rgba(10, 61, 145, 0.85));
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.24), rgba(15, 23, 42, 0.6));
 }
 
 .flight-hero-overlay {
@@ -113,10 +113,10 @@
 }
 
 .btn-search {
-  background: #0a3d91;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
   padding: 0 30px;
   height: 48px;
   font-weight: 700;
@@ -127,7 +127,7 @@
 }
 
 .btn-search:hover {
-  background: #083075;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
 }
 
 .search-checkboxes {
@@ -152,7 +152,7 @@
 }
 
 .popular-destinations h2 {
-  color: #0a3d91;
+  color: var(--primary-color);
   font-size: 1.5rem;
   font-weight: 800;
   margin-bottom: 24px;

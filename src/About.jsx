@@ -1,43 +1,60 @@
 import "./About.css";
 import Navbar from "./Navbar";
-import { FaRocket, FaLightbulb, FaFacebookF, FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import Footer from "./components/Footer";
+import { FaRocket, FaLightbulb, FaShieldAlt, FaHandshake } from "react-icons/fa";
 import aboutBg from "./assets/img2.5.jpg";
 import officeImg from "./assets/img 5.png";
-import logo from "./assets/logo.png";
-import appStore from "./assets/foot1.png";
-import googlePlay from "./assets/foot2.png";
 
 function About() {
   return (
     <div className="about-page">
       <Navbar />
 
-      {/* HERO */}
       <section
         className="about-hero"
         style={{ backgroundImage: `url(${aboutBg})` }}
       >
         <div className="about-hero-overlay">
-          <h1>About Us</h1>
+          <span className="hero-kicker">Premium mobility across Cameroon</span>
+          <h1>Built for journeys that need comfort, speed, and trust.</h1>
           <p>
             Mooves delivers premium mobility solutions across Cameroon,
-            providing luxury car rentals, chauffeur services, airport
-            transfers, and fleet management designed for comfort,
-            reliability, and performance.
+            including luxury car rentals, chauffeur services, airport
+            transfers, and fleet management designed to move businesses and
+            travelers with confidence.
           </p>
+
+          <div className="hero-actions">
+            <button className="btn-services">Our Services</button>
+            <button className="btn-secondary">Talk to Us</button>
+          </div>
+
+          <div className="hero-stats">
+            <div className="stat-box">
+              <strong>10+</strong>
+              <span>Years of experience</span>
+            </div>
+            <div className="stat-box">
+              <strong>500+</strong>
+              <span>Fleet vehicles</span>
+            </div>
+            <div className="stat-box">
+              <strong>24/7</strong>
+              <span>Support coverage</span>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* WHO WE ARE */}
       <section className="who-we-are">
         <div className="who-content">
           <span className="badge">WHO WE ARE</span>
-          <h2>We Help You Get Solutions</h2>
+          <h2>Smart mobility built around your needs.</h2>
           <p>
-            At Move, we understand the importance of reliable vehicles
-            tailored to your business needs. That's why we're here to offer
-            you customized car rental solutions, designed specifically to
-            meet the demands of your business
+            At Mooves, we understand that reliable transportation is more than
+            a service — it is a business advantage. That is why we design
+            tailored rental and mobility solutions to support your operations,
+            schedule, and day-to-day comfort.
           </p>
 
           <div className="who-features">
@@ -45,20 +62,28 @@ function About() {
               <FaRocket className="feature-icon" />
               <div>
                 <h4>Premium Experience</h4>
-                <p>Luxury and comfort in every journey.</p>
+                <p>Luxury, comfort, and smooth journeys from start to finish.</p>
               </div>
             </div>
 
             <div className="who-feature">
               <FaLightbulb className="feature-icon" />
               <div>
-                <h4>Reliability</h4>
-                <p>Always available when you need us.</p>
+                <h4>Smart Solutions</h4>
+                <p>Flexible transport options designed around business needs.</p>
+              </div>
+            </div>
+
+            <div className="who-feature">
+              <FaShieldAlt className="feature-icon" />
+              <div>
+                <h4>Trusted Reliability</h4>
+                <p>Well-maintained vehicles and support you can count on.</p>
               </div>
             </div>
           </div>
 
-          <button className="btn-services">Services</button>
+          <button className="btn-services">Explore Services</button>
         </div>
 
         <div className="who-image">
@@ -66,112 +91,69 @@ function About() {
           <div className="who-image-card">
             <p className="lorem">Our Mission is YOU</p>
             <h4>Professional Service</h4>
-            <p className="card-text">Always available when you need us.</p>
+            <p className="card-text">Reliable support for every business journey.</p>
           </div>
         </div>
       </section>
 
-      {/* TESTIMONIALS */}
+      <section className="about-values">
+        <div className="values-header">
+          <span className="badge dark">WHY CHOOSE US</span>
+          <h3>Mobility designed to keep you moving.</h3>
+        </div>
+
+        <div className="value-grid">
+          <div className="value-card highlight">
+            <FaHandshake className="value-icon" />
+            <h4>Client-first approach</h4>
+            <p>We listen closely, customize quickly, and deliver service that fits your pace.</p>
+          </div>
+
+          <div className="value-card">
+            <FaShieldAlt className="value-icon" />
+            <h4>Quality assurance</h4>
+            <p>Every vehicle is maintained to meet our standard for safety and comfort.</p>
+          </div>
+
+          <div className="value-card">
+            <FaRocket className="value-icon" />
+            <h4>Fast execution</h4>
+            <p>From booking to arrival, we keep your trip moving without unnecessary delays.</p>
+          </div>
+        </div>
+      </section>
+
       <section className="testimonials">
-        <h2>
-          Hear what people are saying about Mooves Travel and Location
-        </h2>
+        <h2>Hear what people are saying about Mooves Travel and Location</h2>
 
         <div className="testimonial-grid">
-          {[1, 2, 3].map((item) => (
-            <div className="testimonial-card" key={item}>
+          {[
+            {
+              name: "Giorno Roman",
+              review:
+                "Their service has been reliable, professional, and exactly what our business needs for smooth travel and transport planning.",
+            },
+            {
+              name: "Safou Innousa",
+              review:
+                "The team is extremely responsive and the vehicle quality is outstanding. Every journey feels smooth, safe, and comfortable.",
+            },
+            {
+              name: "Tiencheu Alexandra",
+              review:
+                "From airport pickup to business travel arrangements, everything was handled with care, punctuality, and excellent customer service.",
+            },
+          ].map((testimonial) => (
+            <div className="testimonial-card" key={testimonial.name}>
               <div className="testimonial-avatar"></div>
-              <h4>Giorno Roman</h4>
-              <p>
-                you customized car rental solutions, designed specifically to
-                meet the demands of your business
-              </p>
+              <h4>{testimonial.name}</h4>
+              <p>{testimonial.review}</p>
             </div>
           ))}
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-grid">
-          <div className="footer-brand">
-            <img src={logo} alt="Mooves Logo" className="footer-logo" />
-            <p>
-              Premium mobility, vehicle rental, fleet management, and
-              ticketing solutions designed to deliver comfort, flexibility,
-              and reliability.
-            </p>
-
-            <h4>Download App</h4>
-            <div className="app-buttons">
-              <img src={appStore} alt="App Store" />
-              <img src={googlePlay} alt="Google Play" />
-            </div>
-
-            <div className="social-icons">
-              <FaFacebookF />
-              <FaInstagram />
-              <FaTwitter />
-              <FaYoutube />
-            </div>
-          </div>
-
-          <div className="footer-col">
-            <h4>Address</h4>
-            <p>BP 482 Douala - Makepe montée BM</p>
-
-            <h4>Quick Links</h4>
-            <ul>
-              <li>Home</li>
-              <li>Car Rents</li>
-              <li>Business Solution</li>
-              <li>Flight Booking</li>
-              <li>Fleet</li>
-              <li>About Us</li>
-              <li>Contact</li>
-            </ul>
-          </div>
-
-          <div className="footer-col">
-            <h4>Email</h4>
-            <p>business@moove-location.com</p>
-
-            <h4>Services</h4>
-            <ul>
-              <li>Car Rental</li>
-              <li>Flight Ticketing</li>
-              <li>Chauffeur Services</li>
-              <li>Corporate Vehicle Leasing</li>
-              <li>Airport Transfer Service</li>
-              <li>Utility Pickup Vehicle Rental</li>
-              <li>Fleet Management Service</li>
-              <li>Executive/Luxury Transportation</li>
-              <li>Business Mobility Solution</li>
-            </ul>
-          </div>
-
-          <div className="footer-col">
-            <h4>Phone</h4>
-            <p>
-              +237 653 1718 34 <br /> 692 38 29 17
-            </p>
-
-            <h4>Support</h4>
-            <ul>
-              <li>Help Center</li>
-              <li>FAQs</li>
-              <li>Terms &amp; Conditions</li>
-              <li>Privacy Policy</li>
-              <li>Booking Policy</li>
-              <li>Customer Support</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          © 2025 Mooves Travel and Location. All Rights Reserved.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

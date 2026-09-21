@@ -77,7 +77,7 @@ const Navbar = () => {
             <span className="user-name" style={{ fontWeight: '600', color: '#333' }}>
               {user.displayName || user.email}
             </span>
-            <div className="user-icon-container" style={{ width: '35px', height: '35px', borderRadius: '50%', backgroundColor: '#0068BB', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', color: 'white', overflow: 'hidden' }}>
+            <div className="user-icon-container" style={{ width: '35px', height: '35px', borderRadius: '50%', backgroundColor: '#16a673', display: 'flex', alignItems: 'center', justifyItems: 'center', justifyContent: 'center', color: 'white', overflow: 'hidden' }}>
               {user.photoURL ? <img src={user.photoURL} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span>{user.displayName?.charAt(0) || user.email?.charAt(0)}</span>}
             </div>
             <button onClick={logout} className="nav-logout-btn" style={{ background: 'none', border: '1px solid #ccc', padding: '5px 10px', borderRadius: '5px', cursor: 'pointer', fontSize: '12px' }}>Logout</button>

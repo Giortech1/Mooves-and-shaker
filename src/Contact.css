@@ -6,7 +6,7 @@
 
 /* HERO / FORM SECTION */
 .contact-hero {
-  background: #1d6e4e;
+  background: linear-gradient(135deg, #0d3b2a 0%, #0f8f61 45%, #0f172a 100%);
   color: #fff;
   padding: 50px 60px 70px;
 }
@@ -106,7 +106,7 @@
 }
 
 .btn-send {
-  background: #f6b93b;
+  background: linear-gradient(135deg, #f6b93b, #df9d11);
   color: #1e293b;
   border: none;
   padding: 16px 40px;
@@ -116,7 +116,7 @@
   align-self: flex-start;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 10px rgba(246, 185, 59, 0.3);
+  box-shadow: 0 8px 18px rgba(246, 185, 59, 0.24);
 }
 
 @media (max-width: 600px) {

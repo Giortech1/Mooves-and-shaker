@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from 'react';
 // Link not used in this component
 import './CarRent.css';
 import Navbar from './Navbar';
+import Footer from './components/Footer';
 import { useAuth } from './hooks/useAuth.jsx';
 import img1 from './assets/corola toyota.png';
 import img2 from './assets/car1.png';
@@ -366,99 +367,7 @@ const CarRent = () => {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-top">
-          {/* Brand */}
-          <div className="footer-brand">
-            <div className="footer-logo">
-                <img src={img13} alt="Mooves Logo" />
-            </div>
-            <p>Premium mobility, vehicle rental, fleet management, and ticketing solutions designed to deliver comfort, flexibility, and reliability.</p>
-            <div className="app-badges">
-              <div className="app-badge">
-                <img src={img8} alt="App Store" />
-              </div>
-              <div className="app-badge">
-                <img src={img9} alt="Google Play" />
-              </div>
-            </div>
-            <div className="social-links">
-              <div className="social-icon"><FaFacebook /></div>
-              <div className="social-icon"><FaInstagram /></div>
-              <div className="social-icon"><FaTwitter /></div>
-              <div className="social-icon"><FaYoutube /></div>
-            </div>
-          </div>
-
-          {/* Address / Email / Phone */}
-          <div className="footer-col">
-            <div className="footer-contact-item">
-              <div className="footer-contact-icon">
-                <img src={img12} alt="Address Icon" />
-              </div>
-              <div className="footer-contact-info">
-                <h5>Address</h5>
-                <p>BP 482 Douala - Makepe montée 8M</p>
-              </div>
-            </div>
-            <div className="footer-contact-item">
-              <div className="footer-contact-icon">
-                <img src={img11} alt="Email Icon" />
-              </div>
-              <div className="footer-contact-info">
-                <h5>Email</h5>
-                <p>business@moove-location.com</p>
-              </div>
-            </div>
-            <div className="footer-contact-item">
-              <div className="footer-contact-icon">
-                <img src={img10} alt="Phone Icon" />
-              </div>
-              <div className="footer-contact-info">
-                <h5>Phone</h5>
-                <p>+237 653 1716 34<br />692 38 29 17</p>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="footer-col">
-            <h4>Quick Links</h4>
-            <ul>
-              {['Home','Car Rents','Business Solution','Flight Booking','Fleet','About Us','Contact'].map(l => (
-                <li key={l}><a href="#">{l}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Services + Support */}
-          <div className="footer-services-support">
-            <div className="footer-col">
-              <h4>Services</h4>
-              <ul>
-                {['Car Rental','Flight Ticketing','Chauffeur Services','Corporate Vehicle Leasing',
-                  'Airport Transfer Service','Utility Pickup Vehicle Rental','Fleet Management Service',
-                  'Executive/Luxury Transportation','Business Mobility Solution'].map(s => (
-                  <li key={s}><a href="#">{s}</a></li>
-                ))}
-              </ul>
-            </div>
-            <div className="footer-col">
-              <h4>Support</h4>
-              <ul>
-                {['Help Center','FAQs','Terms & Conditions','Privacy Policy','Booking Policy','Customer Support'].map(s => (
-                  <li key={s}><a href="#">{s}</a></li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          © 2026 Mooves Travel and Location. All Rights Reserved.
-        </div>
-      </footer>
+      <Footer />
 
     </div>
   );

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from './hooks/useAuth.jsx';
 import './CarRents.css';
+import Footer from './components/Footer';
 import logo from './assets/logo.png';
 
 // Fleet Assets
@@ -85,7 +86,7 @@ const CarRents = () => {
           {user ? (
             <div className="user-profile-nav" style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
               <span className="user-name">{user.displayName || user.email}</span>
-              <div className="user-icon-placeholder" style={{ width: '35px', height: '35px', borderRadius: '50%', background: '#0068BB', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+              <div className="user-icon-placeholder" style={{ width: '35px', height: '35px', borderRadius: '50%', background: '#16a673', color: 'white', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                 {user.displayName?.charAt(0) || user.email?.charAt(0)}
               </div>
               <button onClick={logout} className="nav-logout-btn">Logout</button>
@@ -161,31 +162,7 @@ const CarRents = () => {
         </div>
       </main>
 
-      {/* Footer */}
-      <footer className="footer">
-        <div className="footer-content">
-          <div className="footer-logo">
-            <img src={logo} alt="Mooves Logo" />
-            <p>Mooves Travel - Your ultimate travel companion.</p>
-          </div>
-          <div className="footer-links">
-            <h4>Quick Links</h4>
-            <ul>
-              <li><Link to="/">Home</Link></li>
-              <li><a href="#destination">Destination</a></li>
-              <li><a href="#packages">Packages</a></li>
-            </ul>
-          </div>
-          <div className="footer-contact">
-            <h4>Contact Us</h4>
-            <p>Email: info@moovestravel.com</p>
-            <p>Phone: +1 234 567 890</p>
-          </div>
-        </div>
-        <div className="footer-bottom">
-          <p>&copy; 2026 Mooves Travel. All rights reserved.</p>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

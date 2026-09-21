@@ -10,24 +10,31 @@
   color: #fff;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 60px 60px 0;
+  justify-content: center;
+  gap: 30px;
+  padding: 50px 60px 0;
   border-radius: 0 0 30px 30px;
   overflow: hidden;
   position: relative;
   min-height: 320px;
+  max-height: 100vh;
 }
 
 .fleet-hero-text {
   flex: 1 1 400px;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
 }
 
 .fleet-hero-text h1 {
-  font-size: 2.6rem;
+  font-size: clamp(2.2rem, 4vw, 3.4rem);
   font-weight: 800;
   margin-bottom: 16px;
-  line-height: 1.2;
+  line-height: 1.1;
 }
 
 .fleet-hero-text p {
@@ -64,16 +71,24 @@
 }
 
 .fleet-hero-image {
-  flex: 1 1 400px;
+  flex: 1 1 420px;
   display: flex;
-  justify-content: flex-end;
-  align-items: flex-end;
+  justify-content: center;
+  align-items: center;
+  max-height: calc(100vh - 150px);
+  overflow: hidden;
+  border-radius: 28px;
+  padding: 8px;
 }
 
 .fleet-hero-image img {
   max-width: 100%;
   height: auto;
+  max-height: calc(100vh - 220px);
   object-fit: contain;
+  border-radius: 22px;
+  display: block;
+  filter: drop-shadow(0 22px 30px rgba(12, 35, 28, 0.22));
 }
 
 /* FILTER BAR */
@@ -154,18 +169,11 @@
   color: #94a3b8;
 }
 
-.vehicle-price {
-  text-align: right;
-  font-weight: 700;
-  color: #f6b93b;
-  font-size: 1.1rem;
-}
-
-.vehicle-price span {
-  display: block;
-  font-size: 0.7rem;
-  font-weight: 400;
-  color: #94a3b8;
+.vehicle-description {
+  font-size: 0.8rem;
+  color: #475569;
+  margin-bottom: 12px;
+  line-height: 1.5;
 }
 
 .vehicle-specs {
@@ -214,86 +222,115 @@
 
 /* WHY OUR FLEET */
 .fleet-why {
-  background: #16a673;
-  color: #fff;
+  background: #f8fafc;
+  color: #0f172a;
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 0;
+  grid-template-columns: 1.2fr repeat(4, minmax(0, 1fr));
+  gap: 20px;
   padding: 50px 60px;
+  align-items: stretch;
+}
+
+.why-title {
+  background: linear-gradient(135deg, #ebfff6, #ffffff);
+  border: 1px solid #dfe9e4;
+  border-radius: 24px;
+  padding: 28px;
+  display: flex;
   align-items: center;
+  min-height: 220px;
 }
 
 .why-title h2 {
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-weight: 800;
   line-height: 1.4;
+  color: #0f172a;
 }
 
 .why-item {
-  border-left: 1px solid rgba(255, 255, 255, 0.25);
-  padding-left: 24px;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  padding: 26px 22px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 220px;
 }
 
 .why-item h4 {
   font-size: 1.05rem;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  color: #0f172a;
 }
 
 .why-item p {
   font-size: 0.85rem;
-  line-height: 1.5;
-  opacity: 0.9;
+  line-height: 1.6;
+  color: #475569;
+  opacity: 1;
 }
 
 /* FLEET MANAGEMENT */
 .fleet-management {
   display: flex;
-  background: #16a673;
-  color: #fff;
-  align-items: stretch;
+  background: #f8fafc;
+  color: #0f172a;
+  align-items: center;
+  gap: 30px;
+  padding: 20px 30px 50px;
 }
 
 .management-image {
   flex: 1 1 45%;
+  border-radius: 28px;
+  overflow: hidden;
+  box-shadow: 0 20px 38px rgba(15, 23, 42, 0.08);
 }
 
 .management-image img {
   width: 100%;
   height: 100%;
+  min-height: 360px;
   object-fit: cover;
   display: block;
 }
 
 .management-content {
   flex: 1 1 55%;
-  padding: 60px;
+  padding: 30px 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
 .management-content h3 {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   letter-spacing: 1px;
-  font-weight: 600;
+  font-weight: 700;
   margin-bottom: 10px;
-  opacity: 0.9;
+  color: #16a673;
+  opacity: 1;
 }
 
 .management-content h2 {
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: 1.9rem;
+  font-weight: 700;
   margin-bottom: 16px;
   max-width: 500px;
+  color: #0f172a;
 }
 
 .management-content p {
   font-size: 0.95rem;
-  line-height: 1.6;
+  line-height: 1.7;
   max-width: 480px;
   margin-bottom: 30px;
-  opacity: 0.95;
+  color: #475569;
+  opacity: 1;
 }
 
 .management-stats {

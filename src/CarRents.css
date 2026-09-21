@@ -1,9 +1,9 @@
 .fleet-page-container {
   width: 100%;
   overflow-x: hidden;
-  --color-blue: #0068BB;
+  --color-blue: #16a673;
   --color-green: #25C484;
-  --color-navy: #004B6A;
+  --color-navy: #0f172a;
   --bg-light: #f8f9fa;
   background-color: var(--bg-light);
 }

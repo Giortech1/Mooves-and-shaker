@@ -1,9 +1,17 @@
 :root {
-  --primary-color: #25C484;
-  --secondary-color: #ffffff;
-  --text-color: #333333;
-  --gray-color: #F5F5F5;
-  --dark-gray: #7D7D7D;
+  --primary-color: #16a673;
+  --primary-dark: #0e8c5f;
+  --primary-soft: #ebfff6;
+  --accent-color: #f6b93b;
+  --accent-dark: #df9d11;
+  --surface-color: #ffffff;
+  --surface-alt: #f8fafc;
+  --text-color: #0f172a;
+  --muted-text: #475569;
+  --gray-color: #f5f7fa;
+  --dark-gray: #64748b;
+  --border-color: #e2e8f0;
+  --shadow-soft: 0 12px 35px rgba(15, 23, 42, 0.08);
   --font-family: 'Poppins', sans-serif;
 }
 
@@ -13,9 +21,13 @@
   padding: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: var(--font-family);
-  background-color: var(--secondary-color);
+  background: linear-gradient(180deg, #f9fbfa 0%, #f5f7f9 100%);
   color: var(--text-color);
 }
 
@@ -28,9 +40,11 @@ button {
   cursor: pointer;
   border: none;
   outline: none;
+  transition: all 0.25s ease;
 }
 
-input {
+input, textarea, select {
+  font: inherit;
   outline: none;
 }
 
@@ -38,6 +52,24 @@ img, video {
   max-width: 100%;
   height: auto;
   display: block;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color);
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-outline,
+.btn-view,
+.btn-send,
+.btn-explore,
+.nav-login,
+.nav-signup,
+.car-rent-hero-cta,
+.book-now-btn {
+  border-radius: 999px;
+  font-weight: 700;
 }
 
 /* Global card reveal animation */

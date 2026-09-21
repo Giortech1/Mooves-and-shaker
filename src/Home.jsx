@@ -1,23 +1,19 @@
 import { useState, useEffect, useRef } from 'react';
 import './Home.css';
 import Navbar from './Navbar';
+import Footer from './components/Footer';
 import { useAuth } from './hooks/useAuth.jsx';
-import logo from './assets/logo.png';
 import {
-  FaFacebookF, FaInstagram, FaTwitter, FaYoutube,
-  FaMapMarkerAlt, FaEnvelope, FaPhoneAlt,
   FaChevronLeft, FaChevronRight,
 } from "react-icons/fa";
 import heroSlide1 from "./assets/img slide 1.png";
-import heroSlide2 from "./assets/img slide 5.png";
+import heroSlide2 from "./assets/img slide 2.png";
 import heroSlide3 from "./assets/img slide 3.png";
-import cadillac from "./assets/escalade-removebg-preview.png";
-import lamborghini from "./assets/ABT_Lamborghini_Urus_Scatenato_2024-removebg-preview.png";
+import heroSlide4 from "./assets/img slide 4.png";
+import heroSlide5 from "./assets/img slide 5.png";
 import client1 from "./assets/Avatar6.png";
 import client2 from "./assets/ayesha.png";
 import client3 from "./assets/mehak.png";
-import appStore from "./assets/foot1.png";
-import googlePlay from "./assets/foot2.png";
 import car from "./assets/corola toyota.png";
 import visa from "./assets/visa.jpg";
 import driver from "./assets/img 5.png";
@@ -27,6 +23,12 @@ import pickup from "./assets/Img 1.png";
 import fleet from "./assets/Creative_Poster_Design-removebg-preview.png";
 import luxury from "./assets/luxury.jpg";
 import fleet1 from "./assets/fleet.jpg";
+const moove1 = new URL('./assets/Moove 1.JPEG', import.meta.url).href;
+const moove2 = new URL('./assets/Moove 2.JPEG', import.meta.url).href;
+const moove3 = new URL('./assets/Moove 3.JPEG', import.meta.url).href;
+const moove4 = new URL('./assets/Moove 4.JPEG', import.meta.url).href;
+const moove5 = new URL('./assets/Moove 5.JPEG', import.meta.url).href;
+const moove6 = new URL('./assets/Moove 6.JPEG', import.meta.url).href;
 
 const heroSlides = [
   {
@@ -43,6 +45,16 @@ const heroSlides = [
     img: heroSlide3,
     title: "Comfort Meets Performance",
     text: "Discover our sedan collection, perfect for business travel and city driving in style.",
+  },
+  {
+    img: heroSlide4,
+    title: "Executive Rides With Total Confidence",
+    text: "Travel in luxury, arrive in style, and enjoy a smoother experience with our premium chauffeur and executive fleet.",
+  },
+  {
+    img: heroSlide5,
+    title: "Business Mobility That Moves With You",
+    text: "From airport transfers to full fleet support, we help you stay efficient, punctual, and comfortable every day.",
   },
 ];
 
@@ -150,8 +162,18 @@ const testimonials = [
   },
 ];
 
+const premiumVehicles = [
+  { title: 'Toyota Pickup', type: 'Luxury', image: moove1 },
+  { title: 'Toyota Pickup', type: 'SUV', image: moove2 },
+  { title: 'Toyota Pickup', type: 'Executive', image: moove3 },
+  { title: 'Toyota Pickup', type: 'Sedan', image: moove4 },
+  { title: 'Toyota Pickup', type: 'Adventure', image: moove5 },
+  { title: 'Toyota Pickup', type: 'Luxury', image: moove6 },
+];
+
 function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [vehicleIndex, setVehicleIndex] = useState(0);
   const [activeService, setActiveService] = useState('car');
   const [showClassDropdown, setShowClassDropdown] = useState(false);
   const [flightClass, setFlightClass] = useState('Economy');
@@ -160,7 +182,6 @@ function Home() {
   const [children, setChildren] = useState(0);
   const [flightResults, setFlightResults] = useState([]);
   const [isSearchingFlights, setIsSearchingFlights] = useState(false);
-  const [activeFilter, setActiveFilter] = useState("All");
   
   const { user } = useAuth();
   
@@ -283,6 +304,8 @@ function Home() {
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev === heroSlides.length - 1 ? 0 : prev + 1));
   };
+
+  const currentVehicle = premiumVehicles[vehicleIndex];
 
   return (
     <div className="home-page">
@@ -523,7 +546,7 @@ function Home() {
             {flightResults.map(flight => (
               <div key={flight.id} className="flight-ticket-card" style={{ background: '#fff', padding: '20px', borderRadius: '10px', boxShadow: '0 4px 12px rgba(0,0,0,0.1)', marginBottom: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div className="flight-info">
-                  <h4 style={{ color: '#0068BB', margin: '0' }}>{flight.airline}</h4>
+                  <h4 style={{ color: '#16a673', margin: '0' }}>{flight.airline}</h4>
                   <p style={{ fontSize: '1.2rem', fontWeight: 'bold', margin: '5px 0' }}>{flight.departureTime} ✈ {flight.arrivalTime}</p>
                   <p style={{ color: '#666', margin: '0' }}>{flight.from} to {flight.to}</p>
                 </div>
@@ -562,51 +585,55 @@ function Home() {
 
       {/* VEHICLE COLLECTION */}
       <section className="collection-section">
-        <h2>Explore Our Premium Vehicle Collection</h2>
+        <div className="collection-header">
+          <div>
+            <p className="section-kicker">Fleet showcase</p>
+            <h2>Explore Our Premium Vehicle Collection</h2>
+          </div>
 
-        <div className="collection-filters">
-          {["All", "Luxury", "SUVs", "Economy", "Pickup"].map((f) => (
-            <span
-              key={f}
-              className={activeFilter === f ? "active" : ""}
-              onClick={() => setActiveFilter(f)}
+          <div className="slider-controls">
+            <button
+              className="slider-btn"
+              aria-label="Previous vehicle"
+              onClick={() => setVehicleIndex((prev) => (prev === 0 ? premiumVehicles.length - 1 : prev - 1))}
             >
-              {f}
-            </span>
-          ))}
+              <FaChevronLeft />
+            </button>
+            <button
+              className="slider-btn"
+              aria-label="Next vehicle"
+              onClick={() => setVehicleIndex((prev) => (prev === premiumVehicles.length - 1 ? 0 : prev + 1))}
+            >
+              <FaChevronRight />
+            </button>
+          </div>
         </div>
 
-        <div className="collection-grid">
-          <div className="collection-card">
-            <img src={cadillac} alt="Cadillac Escalade" />
+        <div className="collection-slider">
+          <div className="collection-card featured">
+            <div className="collection-image-wrap">
+              <img src={currentVehicle.image} alt={currentVehicle.title} />
+            </div>
             <div className="collection-info">
-              <div>
-                <h4>Cadillac Escalade</h4>
-                <span className="price">$450/day</span>
+              <div className="collection-topline">
+                <span className="collection-badge">{currentVehicle.type}</span>
               </div>
-              <div className="collection-meta">
-                <span>5 seats</span>
-                <span>Automatic</span>
-                <span>Complete</span>
-              </div>
-              <button className="btn-rent">Rent Now</button>
+              <h4>{currentVehicle.title}</h4>
+              <p>Toyota Pickup. Reliable, practical, and built for comfort in every journey.</p>
+              <button className="btn-rent">View Details</button>
             </div>
           </div>
 
-          <div className="collection-card">
-            <img src={lamborghini} alt="Lamborghini Urus" />
-            <div className="collection-info">
-              <div>
-                <h4>Lamborghini Urus</h4>
-                <span className="price">$590/day</span>
-              </div>
-              <div className="collection-meta">
-                <span>5 seats</span>
-                <span>Automatic</span>
-                <span>Complete</span>
-              </div>
-              <button className="btn-rent">Rent Now</button>
-            </div>
+          <div className="collection-thumbs">
+            {premiumVehicles.map((vehicle, index) => (
+              <button
+                key={vehicle.title}
+                className={`thumb ${index === vehicleIndex ? 'active' : ''}`}
+                onClick={() => setVehicleIndex(index)}
+              >
+                <img src={vehicle.image} alt={vehicle.title} />
+              </button>
+            ))}
           </div>
         </div>
       </section>
@@ -651,93 +678,7 @@ function Home() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer className="footer">
-        <div className="footer-grid">
-          <div className="footer-brand">
-            <img src={logo} alt="Mooves Logo" className="footer-logo" />
-            <p>
-              Premium mobility, vehicle rental, fleet management, and
-              ticketing solutions designed to deliver comfort, flexibility,
-              and reliability.
-            </p>
-
-            <h4>Download App</h4>
-            <div className="app-buttons">
-              <img src={appStore} alt="App Store" />
-              <img src={googlePlay} alt="Google Play" />
-            </div>
-
-            <div className="social-icons">
-              <FaFacebookF />
-              <FaInstagram />
-              <FaTwitter />
-              <FaYoutube />
-            </div>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-heading">
-              <FaMapMarkerAlt /> Address
-            </h4>
-            <p>BP 482 Douala - Makepe montée BM</p>
-
-            <h4 className="footer-heading green">Quick Links</h4>
-            <ul>
-              <li>Home</li>
-              <li>Car Rents</li>
-              <li>Business Solution</li>
-              <li>Flight Booking</li>
-              <li>Fleet</li>
-              <li>About Us</li>
-              <li>Contact</li>
-            </ul>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-heading">
-              <FaEnvelope /> Email
-            </h4>
-            <p>business@moove-location.com</p>
-
-            <h4 className="footer-heading green">Services</h4>
-            <ul>
-              <li>Car Rental</li>
-              <li>Flight Ticketing</li>
-              <li>Chauffeur Services</li>
-              <li>Corporate Vehicle Leasing</li>
-              <li>Airport Transfer Service</li>
-              <li>Utility Pickup Vehicle Rental</li>
-              <li>Fleet Management Service</li>
-              <li>Executive/Luxury Transportation</li>
-              <li>Business Mobility Solution</li>
-            </ul>
-          </div>
-
-          <div className="footer-col">
-            <h4 className="footer-heading">
-              <FaPhoneAlt /> Phone
-            </h4>
-            <p>
-              +237 653 1716 34 <br /> 692 38 29 17
-            </p>
-
-            <h4 className="footer-heading green">Support</h4>
-            <ul>
-              <li>Help Center</li>
-              <li>FAQs</li>
-              <li>Terms &amp; Conditions</li>
-              <li>Privacy Policy</li>
-              <li>Booking Policy</li>
-              <li>Customer Support</li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="footer-bottom">
-          © 2026 Mooves Travel and Location. All Rights Reserved.
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 }

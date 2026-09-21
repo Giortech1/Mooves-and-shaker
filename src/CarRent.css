@@ -8,8 +8,8 @@
 
 body {
   font-family: 'Inter', 'Segoe UI', sans-serif;
-  color: #1a1a2e;
-  background: #fff;
+  color: var(--text-color);
+  background: #f8fafc;
 }
 
 .car-rent-container {
@@ -47,7 +47,7 @@ body {
 
 /* ===== HERO SECTION ===== */
 .car-rent-hero-section {
-  background: linear-gradient(135deg, #358935 0%, #30913e 40%, #2d6a35 70%, #3a8a42 100%);
+  background: linear-gradient(135deg, #0d3b2a 0%, var(--primary-color) 42%, var(--primary-dark) 100%);
   padding: 60px 80px;
   display: flex;
   border-radius: 45px;
@@ -98,11 +98,11 @@ body {
 }
 
 .car-rent-hero-cta {
-  background: #f59e0b;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
   color: #fff;
   border: none;
   padding: 12px 28px;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
@@ -110,7 +110,7 @@ body {
 }
 
 .car-rent-hero-cta:hover {
-  background: #d97706;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent-color));
 }
 
 .car-rent-hero-car-image {
@@ -188,16 +188,16 @@ body {
 
 .booking-field select:focus,
 .booking-field input:focus {
-  border-color: #22c55e;
+  border-color: var(--primary-color);
 }
 
 .book-now-btn {
   width: 100%;
   padding: 13px;
-  background: #f59e0b;
+  background: linear-gradient(135deg, var(--accent-color), var(--accent-dark));
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 15px;
   font-weight: 700;
   cursor: pointer;
@@ -206,7 +206,7 @@ body {
 }
 
 .book-now-btn:hover {
-  background: #d97706;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent-color));
 }
 
 /* ===== VEHICLES SECTION ===== */
@@ -237,7 +237,7 @@ body {
 .vehicles-header h2 {
   font-size: 26px;
   font-weight: 800;
-  color: #22c55e;
+  color: var(--primary-color);
 }
 
 .search-bar {
@@ -289,8 +289,8 @@ body {
 
 .filter-tab.active,
 .filter-tab:hover {
-  background: #22c55e;
-  border-color: #22c55e;
+  background: var(--primary-color);
+  border-color: var(--primary-color);
   color: #fff;
 }
 
@@ -355,7 +355,7 @@ body {
 .car-price .price {
   font-size: 18px;
   font-weight: 800;
-  color: #f59e0b;
+  color: var(--accent-color);
 }
 
 .car-price .per-day {
@@ -389,16 +389,16 @@ body {
 .car-feature svg {
   width: 14px;
   height: 14px;
-  color: #22c55e;
+  color: var(--primary-color);
 }
 
 .view-details-btn {
   width: 100%;
   padding: 12px;
-  background: #22c55e;
+  background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
   color: #fff;
   border: none;
-  border-radius: 8px;
+  border-radius: 999px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
@@ -406,7 +406,7 @@ body {
 }
 
 .view-details-btn:hover {
-  background: #16a34a;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
 }
 
 /* ===== FOOTER ===== */
@@ -487,7 +487,7 @@ body {
 }
 
 .social-icon:hover {
-  background: #22c55e;
+  background: var(--primary-color);
   color: #fff;
 }
 
@@ -499,7 +499,7 @@ body {
 .footer-col h4 {
   font-size: 14px;
   font-weight: 700;
-  color: #22c55e;
+  color: var(--primary-color);
   margin-bottom: 16px;
 }
 
@@ -518,7 +518,7 @@ body {
 }
 
 .footer-col ul li a:hover {
-  color: #22c55e;
+  color: var(--primary-color);
 }
 
 .footer-contact-item {
@@ -533,7 +533,7 @@ body {
   height: 32px;
   border-radius: 50%;
   background: #f0fdf4;
-  border: 2px solid #22c55e;
+  border: 2px solid var(--primary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -551,7 +551,7 @@ body {
 .footer-contact-info h5 {
   font-size: 12px;
   font-weight: 700;
-  color: #22c55e;
+  color: var(--primary-color);
   margin-bottom: 2px;
 }
 
