@@ -10,6 +10,7 @@ import Fleet from './Fleet';
 import FlightBooking from './FlightBooking';
 import About from './About';
 import Contact from './Contact';
+import AdminDashboard from './admin/AdminDashboard';
 import { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -52,6 +53,7 @@ function AppRoutes() {
       <Route path="/flight-booking" element={<FlightBooking />} />
       <Route path="/about" element={<About />} />
       <Route path="/contact" element={<Contact />} />
+      <Route path="/admin" element={<AdminDashboard />} />
     </Routes>
   );
 }
