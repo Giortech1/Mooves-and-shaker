@@ -3,6 +3,8 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import authRoutes from './routes/authRoutes.js';
 import carRentalRoutes from './routes/carRentalRoutes.js';
+import { db } from './config/firebase.js';
+import flightsRoutes from './routes/flightsRoutes.js';
 import http from 'http';
 
 
@@ -31,16 +33,31 @@ app.use(express.urlencoded({ extended: true }));
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/car-rental', carRentalRoutes);
+app.use('/api/flights', flightsRoutes);
 
 // Endpoint pour soumettre les messages de contact
 app.post('/api/contact/submit', async (req, res) => {
   try {
     const { name, email, message } = req.body;
-    // Ici, vous ajouterez plus tard la logique pour enregistrer dans Firestore :
-    // await db.collection('contacts').add({ name, email, message, createdAt: new Date() });
-    res.json({ success: true, message: 'Message reçu avec succès' });
+
+    if (!name || !email || !message) {
+      return res.status(400).json({ success: false, message: 'name, email et message sont requis.' });
+    }
+
+    const contactDoc = {
+      name,
+      email,
+      message,
+      createdAt: new Date(),
+      source: req.ip || 'unknown'
+    };
+
+    const docRef = await db.collection('contacts').add(contactDoc);
+
+    return res.status(201).json({ success: true, message: 'Message reçu et enregistré', id: docRef.id });
   } catch (error) {
-    res.status(500).json({ success: false, message: 'Erreur lors de l\'enregistrement' });
+    console.error('Erreur enregistrement contact:', error);
+    return res.status(500).json({ success: false, message: 'Erreur lors de l\'enregistrement', error: error.message });
   }
 });
 

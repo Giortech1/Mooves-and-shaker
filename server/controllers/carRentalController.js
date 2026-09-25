@@ -46,3 +46,33 @@ export const createCarRental = async (req, res) => {
     });
   }
 };
+
+// Version de test: enregistre une réservation sans vérifier le token (pour développement)
+export const createCarRentalNoAuth = async (req, res) => {
+  try {
+    const { pickupLocation, dropoffLocation, pickupDate, dropoffDate, carType } = req.body;
+
+    if (!pickupLocation || !dropoffLocation || !pickupDate || !dropoffDate) {
+      return res.status(400).json({ success: false, message: 'Tous les champs sont requis.' });
+    }
+
+    const rentalData = {
+      userId: req.body.userId || 'dev-test-user',
+      pickupLocation,
+      dropoffLocation,
+      pickupDate: new Date(pickupDate),
+      dropoffDate: new Date(dropoffDate),
+      carType: carType || 'Standard',
+      status: 'pending',
+      createdAt: new Date(),
+      devTest: true,
+    };
+
+    const docRef = await db.collection('car_rentals').add(rentalData);
+
+    return res.status(201).json({ success: true, message: 'Test booking enregistré.', bookingId: docRef.id });
+  } catch (error) {
+    console.error('Erreur lors de la réservation (no-auth):', error);
+    return res.status(500).json({ success: false, message: 'Erreur serveur lors de l\'enregistrement.', error: error.message });
+  }
+};

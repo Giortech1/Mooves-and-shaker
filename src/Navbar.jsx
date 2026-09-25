@@ -66,8 +66,22 @@ const Navbar = () => {
           </NavLink>
         </li>
         <li className="nav-auth-mobile">
-          <Link to="/login" className="nav-login" onClick={closeMenu}>Login</Link>
-          <Link to="/signup" className="nav-signup" onClick={closeMenu}>Signup</Link>
+          {user ? (
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#16a673', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', overflow: 'hidden' }}>
+                  {user.photoURL ? <img src={user.photoURL} alt="profile" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ fontSize: '14px' }}>{user.displayName?.charAt(0) || user.email?.charAt(0)}</span>}
+                </div>
+                <span style={{ fontWeight: 600, color: '#333' }}>{user.displayName || user.email}</span>
+              </div>
+              <button onClick={() => { logout(); closeMenu(); }} className="nav-logout-btn" style={{ background: 'none', border: '1px solid #ccc', padding: '6px 10px', borderRadius: '6px', cursor: 'pointer', fontSize: '14px' }}>Logout</button>
+            </div>
+          ) : (
+            <>
+              <Link to="/login" className="nav-login" onClick={closeMenu}>Login</Link>
+              <Link to="/signup" className="nav-signup" onClick={closeMenu}>Signup</Link>
+            </>
+          )}
         </li>
       </ul>
 

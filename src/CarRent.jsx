@@ -20,6 +20,8 @@ import img12 from './assets/foot5.png';
 import img13 from './assets/logo.png';
 import { FaFacebook, FaTwitter, FaInstagram, FaYoutube } from 'react-icons/fa';
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 
 
 // ── Icons (inline SVG helpers) ──────────────────────────────────────
@@ -177,7 +179,7 @@ const CarRent = () => {
     const token = localStorage.getItem('authToken');
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/car-rental/book`, {
+      const response = await fetch(`${API_BASE}/car-rental/book`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -185,11 +187,18 @@ const CarRent = () => {
         },
         body: JSON.stringify({ ...carBooking, carType: finalCarType })
       });
-      const data = await response.json();
-      if (data.success) {
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Erreur ${response.status}: ${text || response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type') || '';
+      const data = contentType.includes('application/json') ? await response.json() : null;
+
+      if (data && data.success) {
         alert(`Demande de réservation envoyée pour : ${finalCarType}. Notre équipe vous contactera bientôt.`);
       } else {
-        alert("Erreur: " + data.message);
+        alert("Erreur: " + (data?.message || 'Réponse inattendue du serveur'));
       }
     } catch (error) {
       console.error("Booking error:", error);

@@ -3,6 +3,8 @@ import Navbar from "./Navbar";
 import Footer from "./components/Footer";
 import { useState } from "react";
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
+
 function Contact() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
@@ -19,7 +21,7 @@ function Contact() {
     }
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/contact/submit`, {
+      const response = await fetch(`${API_BASE}/contact/submit`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -27,13 +29,19 @@ function Contact() {
         body: JSON.stringify(form),
       });
 
-      const data = await response.json();
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Erreur ${response.status}: ${text || response.statusText}`);
+      }
 
-      if (data.success) {
+      const contentType = response.headers.get('content-type') || '';
+      const data = contentType.includes('application/json') ? await response.json() : null;
+
+      if (data && data.success) {
         alert("Votre message a été envoyé avec succès !");
         setForm({ name: "", email: "", message: "" }); // Réinitialise le formulaire
       } else {
-        alert("Erreur: " + data.message);
+        alert("Erreur: " + (data?.message || 'Réponse inattendue du serveur'));
       }
     } catch (error) {
       console.error("Erreur lors de l'envoi du message:", error);

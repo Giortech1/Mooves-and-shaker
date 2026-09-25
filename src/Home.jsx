@@ -30,6 +30,7 @@ const moove4 = new URL('./assets/Moove 4.JPEG', import.meta.url).href;
 const moove5 = new URL('./assets/Moove 5.JPEG', import.meta.url).href;
 const moove6 = new URL('./assets/Moove 6.JPEG', import.meta.url).href;
 
+const API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const heroSlides = [
   {
     img: heroSlide1,
@@ -163,12 +164,12 @@ const testimonials = [
 ];
 
 const premiumVehicles = [
-  { title: 'Toyota Pickup', type: 'Luxury', image: moove1 },
-  { title: 'Toyota Pickup', type: 'SUV', image: moove2 },
-  { title: 'Toyota Pickup', type: 'Executive', image: moove3 },
-  { title: 'Toyota Pickup', type: 'Sedan', image: moove4 },
-  { title: 'Toyota Pickup', type: 'Adventure', image: moove5 },
-  { title: 'Toyota Pickup', type: 'Luxury', image: moove6 },
+  { id: 'toyota-1', title: 'Toyota Pickup 1', type: 'Luxury', image: moove1 },
+  { id: 'toyota-2', title: 'Toyota Pickup 2', type: 'SUV', image: moove2 },
+  { id: 'toyota-3', title: 'Toyota Pickup 3', type: 'Executive', image: moove3 },
+  { id: 'toyota-4', title: 'Toyota Pickup 4', type: 'Sedan', image: moove4 },
+  { id: 'toyota-5', title: 'Toyota Pickup 5', type: 'Adventure', image: moove5 },
+  { id: 'toyota-6', title: 'Toyota Pickup 6', type: 'Luxury', image: moove6 },
 ];
 
 function Home() {
@@ -241,7 +242,7 @@ function Home() {
     console.log("Token envoyé pour la réservation:", token);
 
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/car-rental/book`, {
+      const response = await fetch(`${API_BASE}/car-rental/book`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -249,8 +250,16 @@ function Home() {
         },
         body: JSON.stringify(carBooking)
       });
-      const data = await response.json();
-      if (data.success) {
+      // Vérifier le statut et le type de réponse avant de parser
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Erreur ${response.status}: ${text || response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type') || '';
+      const data = contentType.includes('application/json') ? await response.json() : null;
+
+      if (data && data.success) {
         alert("Votre demande de location a été enregistrée ! L'admin vous contactera.");
         // Réinitialiser le formulaire
         setCarBooking({
@@ -261,7 +270,7 @@ function Home() {
           carType: 'All'
         });
       } else {
-        alert("Erreur: " + data.message);
+        alert("Erreur: " + (data?.message || 'Réponse inattendue du serveur'));
       }
     } catch (error) {
       console.error("Booking error:", error);
@@ -283,9 +292,21 @@ function Home() {
         date: flightSearch.departureDate,
         class: flightClass
       });
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/flights/search?${queryParams}`);
-      const data = await response.json();
-      setFlightResults(data.success ? data.flights : []);
+      const response = await fetch(`${API_BASE}/flights/search?${queryParams}`);
+
+      if (!response.ok) {
+        const text = await response.text();
+        throw new Error(`Erreur ${response.status}: ${text || response.statusText}`);
+      }
+
+      const contentType = response.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const data = await response.json();
+        setFlightResults(data.success ? data.flights : []);
+      } else {
+        const text = await response.text();
+        throw new Error('Réponse inattendue du serveur: ' + text.slice(0, 200));
+      }
     } catch (error) {
       console.error("Flight search error:", error);
     } finally {
@@ -627,9 +648,10 @@ function Home() {
           <div className="collection-thumbs">
             {premiumVehicles.map((vehicle, index) => (
               <button
-                key={vehicle.title}
+                key={vehicle.id}
                 className={`thumb ${index === vehicleIndex ? 'active' : ''}`}
                 onClick={() => setVehicleIndex(index)}
+                aria-label={`Voir ${vehicle.title}`}
               >
                 <img src={vehicle.image} alt={vehicle.title} />
               </button>

@@ -221,13 +221,17 @@ const handleGoogleSuccess = async (credentialResponse) => {
         </div>
 
         <div className="social-login">
-          <GoogleLogin
-            onSuccess={handleGoogleSuccess}
-            onError={handleGoogleError}
-            theme="outline"
-            size="large"
-            width="30%"
-          />
+          {import.meta.env.VITE_GOOGLE_CLIENT_ID ? (
+            <GoogleLogin
+              onSuccess={handleGoogleSuccess}
+              onError={handleGoogleError}
+              theme="outline"
+              size="large"
+              width="30%"
+            />
+          ) : (
+            <div style={{ color: '#666', fontSize: '14px' }}>Google OAuth non configuré.</div>
+          )}
           <button 
             className="social-button" 
             onClick={handleAppleSignUp}

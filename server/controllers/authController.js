@@ -89,6 +89,23 @@ export const signupWithEmail = async (req, res) => {
       });
     }
 
+    // Password minimum length check (Firebase requires >= 6)
+    if (typeof password === 'string' && password.length < 6) {
+      return res.status(400).json({
+        success: false,
+        message: 'Le mot de passe doit contenir au moins 6 caractères.',
+      });
+    }
+
+    // Basic email format validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({
+        success: false,
+        message: 'Format d\'email invalide.',
+      });
+    }
+
     // Vérifier si l'utilisateur existe déjà
     const existingUser = await db
       .collection('users')
@@ -102,6 +119,31 @@ export const signupWithEmail = async (req, res) => {
       });
     }
 
+    // Vérifier également dans Firebase Auth (si un user Auth existe mais pas en Firestore)
+    try {
+      const authUser = await auth.getUserByEmail(email);
+      if (authUser) {
+        console.warn('Tentative d\'inscription: utilisateur déjà présent dans Firebase Auth:', email);
+        return res.status(400).json({
+          success: false,
+          message: 'Un utilisateur avec cet email existe déjà (Firebase Auth).',
+        });
+      }
+    } catch (err) {
+      // Si l'erreur indique que l'utilisateur n'existe pas, on continue.
+      // Pour toute autre erreur, on loggue et renvoie une 500.
+      if (err.code && err.code === 'auth/user-not-found') {
+        // Pas trouvé — OK
+      } else {
+        console.error('Erreur lors de la vérification dans Firebase Auth:', err);
+        return res.status(500).json({
+          success: false,
+          message: 'Erreur interne lors de la vérification de l\'utilisateur.',
+          error: err.message,
+        });
+      }
+    }
+
     // Créer l'utilisateur dans Firebase Auth (pour la gestion centralisée)
     let userRecord;
     try {
@@ -111,10 +153,11 @@ export const signupWithEmail = async (req, res) => {
         displayName: displayName,
       });
     } catch (firebaseError) {
+      console.error('Firebase createUser error:', firebaseError);
       return res.status(400).json({
         success: false,
         message: 'Erreur lors de la création du compte Firebase.',
-        error: firebaseError.message
+        error: firebaseError.message,
       });
     }
 
